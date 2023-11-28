@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using scheduler;
 
 namespace winProExam
 {
@@ -92,6 +93,8 @@ namespace winProExam
 
                     MessageBox.Show("MySQL에 데이터 저장 완료!");
                 }
+                Form4 form4 = new Form4(userId);
+                form4.Show();
             }
             catch (Exception ex)
             {

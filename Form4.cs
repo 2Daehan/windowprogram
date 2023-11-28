@@ -7,15 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using MySql.Data.MySqlClient;
 namespace scheduler
 {
     public partial class Form4 : Form
     {
-
-        public Form4()
+        private string userId;
+        public Form4(string userId)
         {
             InitializeComponent();
+            this.userId = userId;
         }
 
 
