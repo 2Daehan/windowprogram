@@ -15,13 +15,18 @@ namespace winProExam
 {
     public partial class Form3 : Form
     {
+        private string userId;
         string connectionString = "Server = localhost;Database=dbtest;Uid=root;Pwd=1234;";
 
-        public Form3()
+        public Form3(string userId)
         {
             InitializeComponent();
+            this.userId = userId;
+
 
         }
+
+    
 
         private void WKUniversity_Click(object sender, EventArgs e) //오류로 클릭한 Label. 코드 삭제 시 오류 발생(수정할 예정)
         {
@@ -77,7 +82,7 @@ namespace winProExam
                         string courseName = item.ToString(); // 강의 이름이 문자열인 것을 가정하고 필요에 따라 수정
 
                         // 여기서 MySQL INSERT 명령어를 실행합니다.
-                        string insertQuery = $"INSERT INTO account_info (classname) VALUES ('{courseName}')";
+                        string insertQuery = $"INSERT INTO  class_info(id,classname) VALUES ('{userId}','{courseName}')";
 
                         using (MySqlCommand cmd = new MySqlCommand(insertQuery, connection))
                         {
