@@ -17,7 +17,8 @@ namespace 프로젝트
     public partial class Form1 : Form
 
     {
-        
+        private string userId;
+
 
         public Form1()
         {
@@ -48,11 +49,10 @@ namespace 프로젝트
                 if (login_status == 1)
                 {
                     MessageBox.Show("로그인 성공");
+                    userId = loginid; // 올바른 사용자 아이디 할당
                     this.Hide(); // 현재 폼 숨기기
-                    Form3 form3 = new Form3();
+                    Form3 form3 = new Form3(userId);
                     form3.Show();
-                   
-
                 }
                 else
                 {
