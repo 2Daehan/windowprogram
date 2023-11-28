@@ -56,7 +56,7 @@ namespace 프로젝트
                 }
                 else
                 {
-                    MessageBox.Show("회원 정보를 확인해 주세요.");
+                    MessageBox.Show("회원 정보를 다시 확인해 주세요.");
                 }
             }
             catch (Exception ex)
