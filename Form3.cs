@@ -122,6 +122,7 @@ namespace winProExam
 
                     foreach (DataGridViewRow row in dataGridView2.Rows)
                     {
+                        string userID = userId;
                         string classname = row.Cells["과목명"].Value.ToString();
                         string professor = row.Cells["교수명"].Value.ToString();
                         string days = row.Cells["요일"].Value.ToString();
@@ -130,7 +131,7 @@ namespace winProExam
                         string endTime = row.Cells["끝나는교시"].Value.ToString();
 
                         // 각 행의 데이터를 MySQL 쿼리에 추가
-                        insertQuery += $"('{userId}', '{classname}', '{professor}', '{days}', '{classNumber}', '{startTime}', '{endTime}'),";
+                        insertQuery += $"('{userID}', '{classname}', '{professor}', '{days}', '{classNumber}', '{startTime}', '{endTime}'),";
                     }
 
                     // 마지막 쉼표(,) 제거
