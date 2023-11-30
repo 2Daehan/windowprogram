@@ -41,27 +41,23 @@
             this.searchingStudentIDTextbox = new System.Windows.Forms.TextBox();
             this.openClassList = new System.Windows.Forms.Label();
             this.courserRegistrationList = new System.Windows.Forms.Label();
-            this.openClassListBox = new System.Windows.Forms.ListBox();
-            this.courseRegistrationListBox = new System.Windows.Forms.ListBox();
             this.upButton = new System.Windows.Forms.Button();
             this.downButton = new System.Windows.Forms.Button();
             this.decisionButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column_subject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_professor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_class = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_days = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.wkuImage = new System.Windows.Forms.PictureBox();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wkuImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -198,40 +194,6 @@
             this.courserRegistrationList.TabIndex = 11;
             this.courserRegistrationList.Text = "수강신청 목록";
             // 
-            // openClassListBox
-            // 
-            this.openClassListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.openClassListBox.FormattingEnabled = true;
-            this.openClassListBox.ItemHeight = 18;
-            this.openClassListBox.Items.AddRange(new object[] {
-            "윈도우프로그래밍",
-            "창의실무프로젝트",
-            "알고리즘",
-            "컴퓨터조직",
-            "오픈소스SW응용",
-            "프로그래밍언어론",
-            "종교와 원불교",
-            "창의적발상기법",
-            "객체지향프로그래밍",
-            "하나둘셋",
-            "둘둘셋"});
-            this.openClassListBox.Location = new System.Drawing.Point(283, 166);
-            this.openClassListBox.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.openClassListBox.Name = "openClassListBox";
-            this.openClassListBox.Size = new System.Drawing.Size(479, 148);
-            this.openClassListBox.TabIndex = 12;
-            // 
-            // courseRegistrationListBox
-            // 
-            this.courseRegistrationListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.courseRegistrationListBox.FormattingEnabled = true;
-            this.courseRegistrationListBox.ItemHeight = 18;
-            this.courseRegistrationListBox.Location = new System.Drawing.Point(283, 439);
-            this.courseRegistrationListBox.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.courseRegistrationListBox.Name = "courseRegistrationListBox";
-            this.courseRegistrationListBox.Size = new System.Drawing.Size(477, 238);
-            this.courseRegistrationListBox.TabIndex = 13;
-            // 
             // upButton
             // 
             this.upButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -260,10 +222,10 @@
             // decisionButton
             // 
             this.decisionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.decisionButton.Location = new System.Drawing.Point(1129, 565);
+            this.decisionButton.Location = new System.Drawing.Point(1126, 461);
             this.decisionButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.decisionButton.Name = "decisionButton";
-            this.decisionButton.Size = new System.Drawing.Size(210, 124);
+            this.decisionButton.Size = new System.Drawing.Size(210, 162);
             this.decisionButton.TabIndex = 16;
             this.decisionButton.Text = "이 시간표 사용하기!";
             this.decisionButton.UseVisualStyleBackColor = true;
@@ -272,7 +234,7 @@
             // resetButton
             // 
             this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.resetButton.Location = new System.Drawing.Point(789, 439);
+            this.resetButton.Location = new System.Drawing.Point(896, 362);
             this.resetButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(104, 29);
@@ -282,48 +244,17 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column_subject,
-            this.Column_professor,
-            this.Column_class,
-            this.Column_days});
-            this.dataGridView1.Location = new System.Drawing.Point(771, 166);
+            this.dataGridView1.Location = new System.Drawing.Point(284, 181);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(461, 162);
+            this.dataGridView1.Size = new System.Drawing.Size(764, 162);
             this.dataGridView1.TabIndex = 19;
-            // 
-            // Column_subject
-            // 
-            this.Column_subject.HeaderText = "과목명";
-            this.Column_subject.MinimumWidth = 6;
-            this.Column_subject.Name = "Column_subject";
-            this.Column_subject.Width = 125;
-            // 
-            // Column_professor
-            // 
-            this.Column_professor.HeaderText = "교수명";
-            this.Column_professor.MinimumWidth = 6;
-            this.Column_professor.Name = "Column_professor";
-            this.Column_professor.Width = 125;
-            // 
-            // Column_class
-            // 
-            this.Column_class.HeaderText = "분반";
-            this.Column_class.MinimumWidth = 6;
-            this.Column_class.Name = "Column_class";
-            this.Column_class.Width = 125;
-            // 
-            // Column_days
-            // 
-            this.Column_days.HeaderText = "시간";
-            this.Column_days.MinimumWidth = 6;
-            this.Column_days.Name = "Column_days";
-            this.Column_days.Width = 125;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // label1
             // 
@@ -379,7 +310,6 @@
             this.label2.Size = new System.Drawing.Size(45, 15);
             this.label2.TabIndex = 18;
             this.label2.Text = "label2";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // wkuImage
             // 
@@ -393,19 +323,32 @@
             this.wkuImage.TabStop = false;
             this.wkuImage.Visible = false;
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(284, 461);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowHeadersWidth = 51;
+            this.dataGridView2.RowTemplate.Height = 23;
+            this.dataGridView2.Size = new System.Drawing.Size(770, 162);
+            this.dataGridView2.TabIndex = 21;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1373, 760);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.decisionButton);
             this.Controls.Add(this.downButton);
             this.Controls.Add(this.upButton);
-            this.Controls.Add(this.courseRegistrationListBox);
-            this.Controls.Add(this.openClassListBox);
             this.Controls.Add(this.courserRegistrationList);
             this.Controls.Add(this.openClassList);
             this.Controls.Add(this.textBox1);
@@ -425,6 +368,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wkuImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -445,23 +389,18 @@
         private System.Windows.Forms.TextBox searchingStudentIDTextbox;
         private System.Windows.Forms.Label openClassList;
         private System.Windows.Forms.Label courserRegistrationList;
-        private System.Windows.Forms.ListBox openClassListBox;
-        private System.Windows.Forms.ListBox courseRegistrationListBox;
         private System.Windows.Forms.Button upButton;
         private System.Windows.Forms.Button downButton;
         private System.Windows.Forms.Button decisionButton;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_subject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_professor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_class;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_days;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox wkuImage;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridView dataGridView2;
     }
 }
 
