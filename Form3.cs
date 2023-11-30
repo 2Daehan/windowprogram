@@ -1,32 +1,26 @@
 ﻿
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using scheduler;
 
 namespace winProExam
 {
     public partial class Form3 : Form
     {
         private string userId;
-        string connectionString = "Server = localhost;Database=dbtest;Uid=root;Pwd=1234;";
+        string connectionString = "Server=localhost;Database=dbtest;Uid=root;Pwd=1234;";
+        DataTable selectedCoursesDataTable;
 
         public Form3(string userId)
         {
             InitializeComponent();
             this.userId = userId;
-
-
         }
 
+        // MySQL에서 데이터를 로드하여 DataGridView1에 표시하는 메서드
         private void LoadDataFromMySQL()
         {
             try
@@ -40,7 +34,6 @@ namespace winProExam
 
                     using (MySqlCommand cmd = new MySqlCommand(selectQuery, connection))
                     {
-                        // 데이터 어댑터를 사용하여 데이터를 가져오기
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
                         {
                             DataTable dataTable = new DataTable();
@@ -56,6 +49,15 @@ namespace winProExam
             {
                 MessageBox.Show($"에러: {ex.Message}\n{ex.StackTrace}");
             }
+
+            // 선택된 과목을 저장할 DataTable 초기화
+            selectedCoursesDataTable = new DataTable();
+            selectedCoursesDataTable.Columns.Add("과목명");
+            selectedCoursesDataTable.Columns.Add("교수명");
+            selectedCoursesDataTable.Columns.Add("요일");
+            selectedCoursesDataTable.Columns.Add("분반");
+            selectedCoursesDataTable.Columns.Add("시작하는교시");
+            selectedCoursesDataTable.Columns.Add("끝나는교시");
         }
 
         private void WKUniversity_Click(object sender, EventArgs e) //오류로 클릭한 Label. 코드 삭제 시 오류 발생(수정할 예정)
@@ -78,24 +80,18 @@ namespace winProExam
 
         private void downButton_Click(object sender, EventArgs e)
         {
-            // DataGridView1에서 선택된 셀이 있는지 확인
             if (dataGridView1.SelectedCells.Count > 0)
             {
-                // 선택된 셀의 행 인덱스 가져오기
                 int selectedRowIndex = dataGridView1.SelectedCells[0].RowIndex;
-
-                // DataGridView1의 선택된 행 데이터 가져오기
                 DataGridViewRow selectedRow = dataGridView1.Rows[selectedRowIndex];
 
-                // DataGridView2에 행 추가
-                dataGridView2.Rows.Add(selectedRow.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray());
+                // 선택된 행을 DataTable에 추가
+                selectedCoursesDataTable.Rows.Add(selectedRow.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray());
 
-                // DataGridView1에서 선택된 행 제거
-                dataGridView1.Rows.Remove(selectedRow);
+                // dataGridView1에서 선택된 행 제거
+                dataGridView1.Rows.RemoveAt(selectedRowIndex);
             }
         }
-
-    
 
         private void courseRegistrationForm_Load(object sender, EventArgs e)
         {
@@ -120,15 +116,15 @@ namespace winProExam
                     // MySQL에 데이터를 저장하는 쿼리
                     string insertQuery = "INSERT INTO class_info(id, classname, professor, days, class, times1, time2, user_id) VALUES ";
 
-                    foreach (DataGridViewRow row in dataGridView2.Rows)
+                    foreach (DataRow row in selectedCoursesDataTable.Rows)
                     {
                         string userID = userId;
-                        string classname = row.Cells["과목명"].Value.ToString();
-                        string professor = row.Cells["교수명"].Value.ToString();
-                        string days = row.Cells["요일"].Value.ToString();
-                        string classNumber = row.Cells["분반"].Value.ToString();
-                        string startTime = row.Cells["시작하는교시"].Value.ToString();
-                        string endTime = row.Cells["끝나는교시"].Value.ToString();
+                        string classname = row["과목명"].ToString();
+                        string professor = row["교수명"].ToString();
+                        string days = row["요일"].ToString();
+                        string classNumber = row["분반"].ToString();
+                        string startTime = row["시작하는교시"].ToString();
+                        string endTime = row["끝나는교시"].ToString();
 
                         // 각 행의 데이터를 MySQL 쿼리에 추가
                         insertQuery += $"('{userID}', '{classname}', '{professor}', '{days}', '{classNumber}', '{startTime}', '{endTime}'),";
@@ -150,7 +146,6 @@ namespace winProExam
                 MessageBox.Show($"에러: {ex.Message}\n{ex.StackTrace}");
             }
         }
-
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
