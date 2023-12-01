@@ -115,7 +115,7 @@ namespace winProExam
                     connection.Open();
 
                     // MySQL에 데이터를 저장하는 쿼리
-                    string insertQuery = "INSERT INTO class_info(id, classname, professor, days, class, times1, time2, user_id) VALUES ";
+                    string insertQuery = "INSERT INTO class_info(id, classname, professor, days, class, times1, time2) VALUES ";
 
                     foreach (DataRow row in selectedCoursesDataTable.Rows)
                     {
@@ -141,8 +141,6 @@ namespace winProExam
 
                     MessageBox.Show("데이터가 성공적으로 저장되었습니다.");
                 }
-                Form4 form4 = new Form4(userId);
-                form4.Show();
             }
             catch (Exception ex)
             {
