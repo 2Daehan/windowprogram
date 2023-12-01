@@ -18,6 +18,9 @@ namespace scheduler
         {
             InitializeComponent();
             this.userId = userId;
+            // MySQL 연결 초기화
+            string connectionString = "Server=localhost;Database=dbtest;Uid=root;Pwd=1234;";
+            connection = new MySqlConnection(connectionString);
         }
 
 
@@ -33,8 +36,60 @@ namespace scheduler
             dataGridView1.Rows.Add("8교시(16시~17시)");
             dataGridView1.Rows.Add("9교시(17시~18시)");
             dataGridView1.ReadOnly = true;
+            LoadTimetableFromDatabase();  // MySQL에서 시간표 데이터 로드
+            dataGridView1.ReadOnly = true;
         }
 
+        private void LoadTimetableFromDatabase()
+        {
+            try
+            {
+                connection.Open();
+
+                // class_info 테이블에 days, times1, times2, classname, professor 컬럼이 있다고 가정합니다.
+                string query = "SELECT days, times1, time2, classname, professor FROM class_info WHERE id = @userId";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@userId", userId);
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string day = reader["days"].ToString();
+                        int time1 = Convert.ToInt32(reader["times1"]);
+                        int time2 = Convert.ToInt32(reader["time2"]);
+                        string className = reader["classname"].ToString();
+                        string professor = reader["professor"].ToString();
+
+                        dataGridView1[time1, GetRowIndex(day)].Value = className + "\n" + professor;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("오류: " + ex.Message);
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+        }
+        private int GetRowIndex(string day)
+        {
+            // 요일을 행 인덱스로 매핑
+            switch (day)
+            {
+                case "1": return 0;
+                case "2": return 1;
+                case "3": return 2;
+                case "4": return 3;
+                case "5": return 4;
+                // 다른 요일에 대한 케이스 추가
+                // ...
+                default: return 7;
+            }
+        }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
