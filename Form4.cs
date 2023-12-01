@@ -42,6 +42,7 @@ namespace scheduler
 
         private void LoadTimetableFromDatabase()
         {
+
             try
             {
                 connection.Open();
@@ -61,7 +62,19 @@ namespace scheduler
                         string className = reader["classname"].ToString();
                         string professor = reader["professor"].ToString();
 
-                        dataGridView1[time1, GetRowIndex(day)].Value = className + "\n" + professor;
+                        int rowIndex = GetRowIndex(day);
+
+                        // rowIndex가 음수가 아닌 경우에만 값을 설정
+                        if (rowIndex >= 0)
+                        {
+                            SetCellValue(time1, rowIndex, className, professor);
+
+                            // time2가 0보다 큰 경우에만 값을 설정
+                            if (time2 > 0)
+                            {
+                                SetCellValue(time2, rowIndex, className, professor);
+                            }
+                        }
                     }
                 }
             }
@@ -75,21 +88,32 @@ namespace scheduler
                     connection.Close();
             }
         }
+
         private int GetRowIndex(string day)
         {
             // 요일을 행 인덱스로 매핑
             switch (day)
             {
-                case "1": return 0;
-                case "2": return 1;
-                case "3": return 2;
-                case "4": return 3;
-                case "5": return 4;
-                // 다른 요일에 대한 케이스 추가
-                // ...
-                default: return 7;
+                case "월": return 1;
+                case "화": return 2;
+                case "수": return 3;
+                case "목": return 4;
+                case "금": return 5;
+                case "토": return 6;
+                case "일": return 7;
+                default: return 0;
             }
         }
+        private void SetCellValue(int columnIndex, int rowIndex, string className, string professor)
+        {
+            // columnIndex와 rowIndex가 유효한 범위 내에 있는지 확인
+            if (columnIndex >= 0 && columnIndex < dataGridView1.Columns.Count &&
+                rowIndex >= 0 && rowIndex < dataGridView1.Rows.Count)
+            {
+                dataGridView1[columnIndex, rowIndex].Value = className + "\n" + professor;
+            }
+        }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
