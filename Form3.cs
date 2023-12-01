@@ -81,16 +81,20 @@ namespace winProExam
 
         private void downButton_Click(object sender, EventArgs e)
         {
+            // dataGridView1에서 선택된 셀이 있는지 확인
             if (dataGridView1.SelectedCells.Count > 0)
             {
+                // 선택된 셀의 행 인덱스 가져오기
                 int selectedRowIndex = dataGridView1.SelectedCells[0].RowIndex;
+
+                // DataGridView1의 선택된 행 데이터 가져오기
                 DataGridViewRow selectedRow = dataGridView1.Rows[selectedRowIndex];
 
                 // 선택된 행을 DataTable에 추가
                 selectedCoursesDataTable.Rows.Add(selectedRow.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray());
 
-                // dataGridView1에서 선택된 행 제거
-                dataGridView1.Rows.RemoveAt(selectedRowIndex);
+                // DataGridView1에서 선택된 행을 제거하지 않고 dataGridView2에도 추가
+                dataGridView2.Rows.Add(selectedRow.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray());
             }
         }
 
