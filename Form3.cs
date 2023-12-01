@@ -11,6 +11,7 @@ namespace winProExam
 {
     public partial class Form3 : Form
     {
+
         private string userId;
         string connectionString = "Server=localhost;Database=dbtest;Uid=root;Pwd=1234;";
         DataTable selectedCoursesDataTable;
@@ -68,14 +69,28 @@ namespace winProExam
 
         private void upButton_Click(object sender, EventArgs e)
         {
+
+            // dataGridView2에서 선택된 셀이 있는지 확인
             if (dataGridView2.SelectedCells.Count > 0)
             {
+                // 선택된 셀의 행 인덱스 가져오기
                 int selectedRowIndex = dataGridView2.SelectedCells[0].RowIndex;
+
+                // DataGridView2의 선택된 행 데이터 가져오기
+                DataGridViewRow selectedRow = dataGridView2.Rows[selectedRowIndex];
+
+                // 선택된 행의 데이터 배열
+                object[] rowData = selectedRow.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray();
+
+                // DataGridView2에서 선택된 행 제거
                 dataGridView2.Rows.RemoveAt(selectedRowIndex);
-            }
-            else
-            {
-                MessageBox.Show("삭제할 아이템을 선택해 주세요.");
+
+                // selectedCoursesDataTable에서 해당 행 제거
+                DataRow[] rowsToDelete = selectedCoursesDataTable.Select($"과목명 = '{rowData[0]}' AND 교수명 = '{rowData[1]}' AND 요일 = '{rowData[2]}' AND 분반 = '{rowData[3]}' AND 시작하는교시 = '{rowData[4]}' AND 끝나는교시 = '{rowData[5]}'");
+                foreach (DataRow row in rowsToDelete)
+                {
+                    selectedCoursesDataTable.Rows.Remove(row);
+                }
             }
         }
 
@@ -92,6 +107,7 @@ namespace winProExam
 
                 // 선택된 행의 데이터 배열
                 object[] rowData = selectedRow.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray();
+
 
                 // 중복 여부 확인
                 bool issame = dataGridView2.Rows.Cast<DataGridViewRow>().Any(row =>
@@ -114,9 +130,6 @@ namespace winProExam
                 {
                     // 선택된 행을 DataTable에 추가
                     selectedCoursesDataTable.Rows.Add(rowData);
-
-                    // DataGridView1에서 선택된 행을 제거
-                    dataGridView1.Rows.RemoveAt(selectedRowIndex);
 
                     // DataGridView2에 추가
                     dataGridView2.Rows.Add(rowData);
@@ -194,8 +207,8 @@ namespace winProExam
 
         private void resetButton_Click(object sender, EventArgs e)
         {
-           
-            
+
+
         }
 
     }
