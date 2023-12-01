@@ -90,11 +90,41 @@ namespace winProExam
                 // DataGridView1의 선택된 행 데이터 가져오기
                 DataGridViewRow selectedRow = dataGridView1.Rows[selectedRowIndex];
 
-                // 선택된 행을 DataTable에 추가
-                selectedCoursesDataTable.Rows.Add(selectedRow.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray());
+                // 선택된 행의 데이터 배열
+                object[] rowData = selectedRow.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray();
 
-                // DataGridView1에서 선택된 행을 제거하지 않고 dataGridView2에도 추가
-                dataGridView2.Rows.Add(selectedRow.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray());
+                // 중복 여부 확인
+                bool issame = dataGridView2.Rows.Cast<DataGridViewRow>().Any(row =>
+                {
+                    // 각 행의 데이터를 가져와서 비교
+                    bool isSameRow = true;
+                    for (int i = 0; i < rowData.Length; i++)
+                    {
+                        if (!rowData[i].Equals(row.Cells[i].Value))
+                        {
+                            isSameRow = false;
+                            break;
+                        }
+                    }
+                    return isSameRow;
+                });
+
+                // 중복이 아니면 추가
+                if (!issame)
+                {
+                    // 선택된 행을 DataTable에 추가
+                    selectedCoursesDataTable.Rows.Add(rowData);
+
+                    // DataGridView1에서 선택된 행을 제거
+                    dataGridView1.Rows.RemoveAt(selectedRowIndex);
+
+                    // DataGridView2에 추가
+                    dataGridView2.Rows.Add(rowData);
+                }
+                else
+                {
+                    MessageBox.Show("이미 선택된 항목입니다.");
+                }
             }
         }
 
