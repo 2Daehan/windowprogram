@@ -13,6 +13,7 @@ namespace scheduler
     public partial class Form4 : Form
     {
         private string userId;
+        private MySqlConnection connection;  // MySQL 연결 변수 추가
         public Form4(string userId)
         {
             InitializeComponent();
