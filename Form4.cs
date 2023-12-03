@@ -19,7 +19,7 @@ namespace scheduler
             InitializeComponent();
             this.userId = userId;
             // MySQL 연결 초기화
-            string connectionString = "Server=localhost;Database=integrateexam1;Uid=root;Pwd=kysA247365!@;";
+            string connectionString = "Server=localhost;Database=dbtest;Uid=root;Pwd=1234;";
             connection = new MySqlConnection(connectionString);
         }
 
@@ -48,8 +48,8 @@ namespace scheduler
             {
                 connection.Open();
 
-                // class_info 테이블에 days, times1, times2, classname, professor 컬럼이 있다고 가정합니다.
-                string query = "SELECT days, times1, times2, classname, professor FROM class_info WHERE id = @userId";
+                // class_info 테이블에 days, times1, time2, classname, professor 컬럼이 있다고 가정합니다.
+                string query = "SELECT days, times1, time2, classname, professor FROM class_info WHERE id = @userId";
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@userId", userId);
 
