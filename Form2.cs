@@ -49,7 +49,7 @@ namespace 프로젝트
         }
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            this.ActiveControl = textBox1;
         }
 
         private void label1_Click(object sender, EventArgs e)
