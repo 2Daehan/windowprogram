@@ -98,7 +98,7 @@ namespace 프로젝트
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.ActiveControl = textBox1;
+                this.ActiveControl = textBox1;
         }
 
        

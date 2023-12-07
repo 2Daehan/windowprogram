@@ -32,6 +32,7 @@ namespace scheduler
             dataGridView1.Rows.Add("2교시(10시~11시)");
             dataGridView1.Rows.Add("3교시(11시~12시)");
             dataGridView1.Rows.Add("4교시(12시~13시)");
+            dataGridView1.Rows.Add("5교시(13시~14시)");
             dataGridView1.Rows.Add("6교시(14시~15시)");
             dataGridView1.Rows.Add("7교시(15시~16시)");
             dataGridView1.Rows.Add("8교시(16시~17시)");
@@ -59,7 +60,7 @@ namespace scheduler
                     {
                         string day = reader["days"].ToString();
                         int time1 = Convert.ToInt32(reader["times1"]);
-                        int time2 = Convert.ToInt32(reader["times2"]);
+                        int time2 = Convert.ToInt32(reader["time2"]);
                         string className = reader["classname"].ToString();
                         string professor = reader["professor"].ToString();
 
@@ -147,8 +148,8 @@ namespace scheduler
 
             if (textBox1 != null && comboBox1 != null && comboBox2 != null)
             {
-                dataGridView1[comboBox1.SelectedIndex, comboBox2.SelectedIndex].Value = textBox1.Text;
-                dataGridView1[comboBox1.SelectedIndex, comboBox2.SelectedIndex].Style.BackColor = Color.FromArgb(rnd1.Next(0, 255), rnd1.Next(0, 256), rnd1.Next(0, 256));
+                dataGridView1[comboBox1.SelectedIndex+1, comboBox2.SelectedIndex+1].Value = textBox1.Text;
+                dataGridView1[comboBox1.SelectedIndex+1, comboBox2.SelectedIndex + 1].Style.BackColor = Color.FromArgb(rnd1.Next(0, 255), rnd1.Next(0, 256), rnd1.Next(0, 256));
             }
         }
 
